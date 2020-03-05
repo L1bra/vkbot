@@ -6,6 +6,11 @@ import random
 import vk_api
 import time
 import bs4
+import sys
+import os
+
+
+
 
 
 
@@ -15,6 +20,7 @@ class Mine:
 
 	def __init__(self):
 		self.userid = None
+
 
 	LAST_NAME_USER = None
 
@@ -49,34 +55,32 @@ class Mine:
 		return vk_session, tool
 
 
-	### should be done ###
-	# https://vk-api.readthedocs.io/en/latest/upload.html
-	# https://vk.com/dev/photos.get
-	#TODO:  check if self.user_id is None
-	#		figure out how to store it
-	#		choose 1 pic randomly
 	def get_photo(self):
 		_, tool = self._get_api()
 		dump = tool.get_all('photos.get', 100, {'owner_id': MY_ID, 'album_id': 'saved'})
-		# picture_url = dump.get('items')[-1].get('sizes')[-1].get('url')
-		picture_id = dump.get('items')[-1].get('id')
+		lists_items = dump.get('items')
 
-		return picture_id
+		data = ''.join([str(x['id']) + " " for x in lists_items])
+		photo_id = self.get_random(data.split())
+
+		int_opt = next(filter(lambda name: str(name['id']) == photo_id, lists_items))
+
+		return int_opt['id'], int_opt['owner_id']
 
 
 	def get_audio(self):
 		vkObj, _ = self._get_api()
-		dump = VkAudio(vkObj).get(owner_id=self.userid)
+		dump = VkAudio(vkObj).get(owner_id=MY_ID)
 
 		data = ''.join([str(x['id']) + " " for x in dump])
 		track_id = self.get_random(data.split())
 		
 		int_opt = next(filter(lambda name: str(name['id']) == track_id, dump))
 
-		return str(int_opt['artist'] + "-" + int_opt['title'])
+		return int_opt['id'], int_opt['owner_id']
 
 
-	####finish writing
+	# TODO: Finish this
 	# def check_instance(self, obj, key):
 	# 	if isinstance(obj, dict):
 	# 		for k, v in obj.items():
