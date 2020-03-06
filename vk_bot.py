@@ -5,13 +5,17 @@ import vk_api
 import json
 
 
+
+
+
 class VKbot:
-	def __init__(self, user_id):
+	def __init__(self, user_id=None):
 
 		self.parser = Mine()
 
 		self._USER_ID = user_id
 		self._USERNAME = self.parser.get_username_by_id(user_id)
+
 
 		# chat things
 		self.WELCOME_MSG_SEND = False
@@ -42,19 +46,19 @@ class VKbot:
 
 
 	def wall_post(self):
-		vk, _ = self.parser._get_api()
+		photo_id, owner_photo_id = self.parser.get_photo()
+		audio_id, owner_audio_id = self.parser.get_audio() 
 
-		image_id, owner_id = self.parser.get_photo()
-		audio_id, owner_id = self.parser.get_audio() 
-		attachments = 'photo{}_{}, audio{}_{}'.format(owner_id, image_id,
-												owner_id, audio_id)
+		attachments = 'photo{}_{}, audio{}_{}'.format(owner_photo_id, photo_id,
+												owner_audio_id, audio_id)
 
 		response = self.send_method('wall.post', {
-			'owner_id': GROUP_ID,
+			'owner_id': "-"+GROUP_ID,
 			'from_group': 1,
-			'message': '123',
 			'attachments': attachments
 			})
+		
+		return response
 
 
 	# ???

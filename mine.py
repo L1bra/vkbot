@@ -20,6 +20,7 @@ class Mine:
 
 	def __init__(self):
 		self.userid = None
+		self._random_id = None
 
 
 	LAST_NAME_USER = None
@@ -57,7 +58,7 @@ class Mine:
 
 	def get_photo(self):
 		_, tool = self._get_api()
-		dump = tool.get_all('photos.get', 100, {'owner_id': MY_ID, 'album_id': 'saved'})
+		dump = tool.get_all('photos.get', 100, {'owner_id': self.get_id(), 'album_id': 'saved'})
 		lists_items = dump.get('items')
 
 		data = ''.join([str(x['id']) + " " for x in lists_items])
@@ -70,7 +71,7 @@ class Mine:
 
 	def get_audio(self):
 		vkObj, _ = self._get_api()
-		dump = VkAudio(vkObj).get(owner_id=MY_ID)
+		dump = VkAudio(vkObj).get(owner_id=self.get_id())
 
 		data = ''.join([str(x['id']) + " " for x in dump])
 		track_id = self.get_random(data.split())
@@ -79,6 +80,13 @@ class Mine:
 
 		return int_opt['id'], int_opt['owner_id']
 
+
+	def get_id(self):
+		_, tool = self._get_api()
+		dump = tool.get_all('groups.getMembers', 100, {'group_id': GROUP_ID})
+		self._random_id = self.get_random(list(dump['items']))
+
+		return self._random_id
 
 	# TODO: Finish this
 	# def check_instance(self, obj, key):
