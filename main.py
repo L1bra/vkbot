@@ -8,27 +8,10 @@
 ###
 
 
-## its time to think:
-## 
-## > 24/7 работающий код -> cost money (heroku?)
-## > Запускать код фоном, когда работает ноут?
-## > Запускать код когда это нужно(wtf!?)
-## > Database?
+## TODO:	
+##	class VKbot:
+##	> new_message(открой картинки/музыку, мудак)
 ##
-
-
-# TODO:	
-#	class Mine:
-#	> https://vk.com/dev/photos.get
-#	> Дописать get_photo()
-#	> Парсинг всех подписавшихся пользователей > добавление их в "лотерею"
-#
-#
-#	class VKbot:
-#	> дописать post_wall()
-#	> future: модерация?
-#	> new_message(открой картинки/музыку, мудак)
-#
 
 
 
@@ -40,4 +23,4 @@ if __name__ == "__main__":
 		import server
 		server.run()
 	except KeyboardInterrupt:
-		print("terminated")
+		print("terminated!")
