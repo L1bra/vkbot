@@ -6,8 +6,7 @@ import random
 import vk_api
 import time
 import bs4
-import sys
-import os
+
 
 
 
@@ -69,10 +68,15 @@ class Mine:
 		return int_opt['id'], int_opt['owner_id']
 
 
-	def get_audio(self):
+	def get_audio(self, flag=None):
 		vkObj, _ = self._get_api()
-		dump = VkAudio(vkObj).get(owner_id=self.get_id())
 
+		if flag:
+			dump = VkAudio(vkObj).get(owner_id=FIRST_ALBUM.split(':')[0], 
+								album_id=FIRST_ALBUM.split(':')[1])
+		else:
+			dump = VkAudio(vkObj).get(owner_id=self.get_id())
+			
 		data = ''.join([str(x['id']) + " " for x in dump])
 		track_id = self.get_random(data.split())
 		
@@ -81,12 +85,17 @@ class Mine:
 		return int_opt['id'], int_opt['owner_id']
 
 
+
 	def get_id(self):
 		_, tool = self._get_api()
 		dump = tool.get_all('groups.getMembers', 100, {'group_id': GROUP_ID})
 		self._random_id = self.get_random(list(dump['items']))
 
+		while self._random_id == SKIPID:
+			self._random_id = self.get_random(list(dump['items']))
+
 		return self._random_id
+
 
 	# TODO: Finish this
 	# def check_instance(self, obj, key):
