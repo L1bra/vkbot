@@ -72,7 +72,7 @@ class Mine:
 
 		if flag:
 			dump = VkAudio(vkObj).get(owner_id=ALBUM_DICT['ALBUM_{}'.format(random.randint(0, 3))].split('_')[0], 
-								album_id=ALBUM_DICT['ALBUM_{}'.format(random.randint(0, 3))].split('_')[1])
+					album_id=ALBUM_DICT['ALBUM_{}'.format(random.randint(0, 3))].split('_')[1])
 		else:
 			dump = VkAudio(vkObj).get(owner_id=self.get_id())
 			

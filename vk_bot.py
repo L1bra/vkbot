@@ -52,7 +52,7 @@ class VKbot:
 
 
 		attachments = 'photo{}_{}, audio{}_{}'.format(owner_photo_id, photo_id,
-												owner_audio_id, audio_id)
+						owner_audio_id, audio_id)
 
 		response = self.send_method('wall.post', {
 			'owner_id': "-"+GROUP_ID,
