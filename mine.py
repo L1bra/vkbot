@@ -1,5 +1,4 @@
 from vk_api.audio import VkAudio
-import urllib.request
 from cfg import *
 import requests
 import random
@@ -72,8 +71,8 @@ class Mine:
 		vkObj, _ = self._get_api()
 
 		if flag:
-			dump = VkAudio(vkObj).get(owner_id=FIRST_ALBUM.split(':')[0], 
-								album_id=FIRST_ALBUM.split(':')[1])
+			dump = VkAudio(vkObj).get(owner_id=ALBUM_DICT['ALBUM_{}'.format(random.randint(0, 3))].split('_')[0], 
+								album_id=ALBUM_DICT['ALBUM_{}'.format(random.randint(0, 3))].split('_')[1])
 		else:
 			dump = VkAudio(vkObj).get(owner_id=self.get_id())
 			
@@ -83,7 +82,6 @@ class Mine:
 		int_opt = next(filter(lambda name: str(name['id']) == track_id, dump))
 
 		return int_opt['id'], int_opt['owner_id']
-
 
 
 	def get_id(self):
@@ -118,11 +116,11 @@ class Mine:
 
 
 	@staticmethod
-	def _clean_all_tag_from_str(stringLine):
+	def _clean_all_tag_from_str(string):
 		result = ""
 		not_skip = True
 
-		for i in list(stringLine):
+		for i in list(string):
 			if not_skip:
 				if i == "<":
 					not_skip = False

@@ -1,9 +1,7 @@
 from mine import Mine
 from cfg import *
 import requests
-import asyncio
 import vk_api
-import json
 
 
 
@@ -47,10 +45,9 @@ class VKbot:
 
 
 	#TODO: 	audio from playlist and album
-	#		by putting flag in get_audio()
 	def wall_post(self):
 		photo_id, owner_photo_id = self.parser.get_photo()
-		audio_id, owner_audio_id = self.parser.get_audio()
+		audio_id, owner_audio_id = self.parser.get_audio(flag)
 
 
 
@@ -64,6 +61,7 @@ class VKbot:
 			})
 
 		return response
+
 
 	# ???
 	def send_method(self, method, data=None):
