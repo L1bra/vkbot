@@ -47,7 +47,7 @@ class VKbot:
 	#TODO: 	audio from playlist and album
 	def wall_post(self):
 		photo_id, owner_photo_id = self.parser.get_photo()
-		audio_id, owner_audio_id = self.parser.get_audio(flag)
+		audio_id, owner_audio_id = self.parser.get_audio(flag=True)
 
 
 
