@@ -88,7 +88,7 @@ class Mine:
 
     def get_id(self):
         _, tool = self._get_api()
-        dump = tool.get_all('groups.getMembers', 100, {'group_id': "192701320"})
+        dump = tool.get_all('groups.getMembers', 100, {'group_id': GROUP_ID})
 
         while True:
             self._random_id = self.get_random(list(dump['items']))
@@ -102,6 +102,8 @@ class Mine:
         if owner_id not in SKIP_LIST:
             SKIP_LIST.append(owner_id)
 
+        return
+
 
     # TODO: Finish this
     # def check_instance(self, obj, key):
@@ -112,6 +114,7 @@ class Mine:
     # 	elif isinstance(obj, list):
     # 		return
 
+
     @staticmethod
     def _clean_tag_from_str(string):
         s = ""
@@ -120,6 +123,7 @@ class Mine:
             s += char
 
         return s
+
 
     @staticmethod
     def _clean_all_tag_from_str(string):
@@ -138,13 +142,16 @@ class Mine:
 
         return result
 
+
     # yep another GET_SOMETHING, do SOMETHING with it...
     def get_random(self, obj):
         return random.choice(obj)
 
+
     def get_playlist_by_id(self, user_id):
         url = "https://vk.com/audios" + str(user_id)
         return url
+
 
     def req(self, http: str):
         request = requests.get(http)
