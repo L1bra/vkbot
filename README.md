@@ -1,2 +1,2 @@
-# `vk bot`
-Example [vk.com](https://vk.com/mscjpg)
+# vk bot
+Example: [vk](https://vk.com/mscjpg)
