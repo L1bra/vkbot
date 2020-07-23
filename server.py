@@ -11,19 +11,18 @@ def make_time():
 
 
 def run():
-	print("Server started!")
+    print("Server started!")
 
-	bot = VKbot()
+    bot = VKbot()
 
+    while True:
+        try:
+            print('[{}] Creating post...'.format(make_time()))
+            bot.wall_post()
 
-	while True:
-		try:
-			print('[{}] Creating post...'.format(make_time()))
-			bot.wall_post()
-
-			print('[{}] Success!'.format(make_time()))
-			print("[{}] Sleeping...".format(make_time()))
-			sleep(220)
-		except Exception as err:
-			print('[{}] Error: {}'.format(make_time(), err))
-			continue
+            print('[{}] Success!'.format(make_time()))
+            print("[{}] Sleeping...".format(make_time()))
+            sleep(1)
+        except Exception as err:
+            print('[{}] Error: {}'.format(make_time(), err))
+            continue
