@@ -4,6 +4,7 @@ SKIPID = ""
 GROUP_ID = ""
 LOGIN = ''
 PASSWORD = ''
+SKIP_LIST = []
 
 ALBUM_DICT = {
 	'ALBUM_0': "8793969_77282537",
